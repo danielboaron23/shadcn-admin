@@ -1,14 +1,29 @@
-# Shadcn Admin Dashboard
+# 🎓 Shadcn Admin - פרויקט לתלמידים
 
-Admin Dashboard UI crafted with Shadcn and Vite. Built with responsiveness and accessibility in mind.
+Admin Dashboard מודרני לתרגול React, TypeScript, TailwindCSS ו-ShadcnUI.
 
 ![alt text](public/images/shadcn-admin.png)
 
-[![Sponsored by Clerk](https://img.shields.io/badge/Sponsored%20by-Clerk-5b6ee1?logo=clerk)](https://go.clerk.com/GttUAaK)
+> פרויקט זה מבוסס על [shadcn-admin](https://github.com/satnaing/shadcn-admin) והותאם לשימוש חינוכי.
 
-I've been creating dashboard UIs at work and for my personal projects. I always wanted to make a reusable collection of dashboard UI for future projects; and here it is now. While I've created a few custom components, some of the code is directly adapted from ShadcnUI examples.
+## 📚 מדריכים מלאים בעברית
 
-> This is not a starter project (template) though. I'll probably make one in the future.
+### 🚀 התחלה
+- **[⚡ Quick Start](./QUICKSTART.md)** - התחלה מהירה ב-3 צעדים
+- **[🚀 הוראות התקנה](./SETUP.md)** - התקנה מפורטת והרצת הפרויקט
+
+### 📖 למידה
+- **[📖 מדריך לתלמידים](./README-STUDENTS.md)** - מדריך מקיף על הפרויקט וטכנולוגיות
+- **[📁 מבנה הפרויקט](./PROJECT-STRUCTURE.md)** - הסבר מפורט על כל תיקייה וקובץ
+- **[🎯 תרגילים](./EXERCISES.md)** - 15 תרגילים מדורגים + 3 פרויקטים סופיים
+
+### 👨‍🏫 למורים
+- **[👨‍🏫 מדריך למורה](./README-TEACHER.md)** - תכנית לימודים, טיפים, והמלצות
+- **[✅ TODO](./TODO.md)** - רשימת מטלות להכנת הפרויקט
+
+### 🔧 נוספים
+- **[🔧 העלאה לגיטהאב](./GITHUB-SETUP.md)** - הוראות להעלאת הפרויקט לגיטהאב
+- **[📋 סיכום](./SUMMARY.md)** - סיכום כל השינויים והתאמות
 
 ## Features
 
@@ -74,45 +89,56 @@ If you want to update components using the Shadcn CLI (e.g., `npx shadcn@latest 
 
 **Auth (partial):** [Clerk](https://go.clerk.com/GttUAaK)
 
-## Run Locally
+## 🚀 התחלה מהירה
 
-Clone the project
-
+### התקנת pnpm (פעם אחת)
 ```bash
-  git clone https://github.com/satnaing/shadcn-admin.git
+npm install -g pnpm
 ```
 
-Go to the project directory
-
+### שכפול והרצה
 ```bash
-  cd shadcn-admin
+# שכפול הפרויקט
+git clone https://github.com/[YOUR-USERNAME]/shadcn-admin.git
+cd shadcn-admin
+
+# התקנת תלויות
+pnpm install
+
+# הרצת הפרויקט
+pnpm run dev
 ```
 
-Install dependencies
+הפרויקט יהיה זמין ב: **http://localhost:5173/**
 
-```bash
-  pnpm install
-```
+📖 **למדריך מפורט:** ראה [SETUP.md](./SETUP.md)
 
-Start the server
+## 🎯 מה תלמדו בפרויקט?
 
-```bash
-  pnpm run dev
-```
+- ✅ **React 19** - Components, Hooks, State Management
+- ✅ **TypeScript** - Type Safety, Interfaces, Generics
+- ✅ **TailwindCSS** - Utility-First CSS, Responsive Design
+- ✅ **ShadcnUI** - Modern UI Components
+- ✅ **TanStack Router** - File-based Routing
+- ✅ **TanStack Query** - Data Fetching & Caching
+- ✅ **React Hook Form** - Form Management
+- ✅ **Zustand** - State Management
+- ✅ **Zod** - Schema Validation
 
-## Sponsoring this project ❤️
+## 📖 תכנית לימודים מוצעת
 
-If you find this project helpful or use this in your own work, consider [sponsoring me](https://github.com/sponsors/satnaing) to support development and maintenance. You can [buy me a coffee](https://buymeacoffee.com/satnaing) as well. Don’t worry, every penny helps. Thank you! 🙏
+1. **שבוע 1-2:** בסיס - הכרת הפרויקט, תרגילים קלים
+2. **שבוע 3-4:** קומפוננטים - יצירת קומפוננטים, Props, State
+3. **שבוע 5-6:** Routing ו-Data - TanStack Router, API Calls
+4. **שבוע 7-8:** פרויקט סופי - CRUD מלא, UI מלוטש
 
-For questions or sponsorship inquiries, feel free to reach out at [satnaingdev@gmail.com](mailto:satnaingdev@gmail.com).
+📚 **למדריך מלא למורה:** ראה [README-TEACHER.md](./README-TEACHER.md)
 
-### Current Sponsor
+## 🙏 קרדיטים
 
-- [Clerk](https://go.clerk.com/GttUAaK) - authentication and user management for the modern web
+פרויקט זה מבוסס על [shadcn-admin](https://github.com/satnaing/shadcn-admin) מאת [@satnaing](https://github.com/satnaing)
 
-## Author
-
-Crafted with 🤍 by [@satnaing](https://github.com/satnaing)
+תודה ל-[Clerk](https://go.clerk.com/GttUAaK) על החסות של הפרויקט המקורי
 
 ## License
 
