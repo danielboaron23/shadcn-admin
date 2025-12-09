@@ -9,19 +9,23 @@ Admin Dashboard מודרני לתרגול React, TypeScript, TailwindCSS ו-Shad
 ## 📚 מדריכים מלאים בעברית
 
 ### 🚀 התחלה
+
 - **[⚡ Quick Start](./QUICKSTART.md)** - התחלה מהירה ב-3 צעדים
 - **[🚀 הוראות התקנה](./SETUP.md)** - התקנה מפורטת והרצת הפרויקט
 
 ### 📖 למידה
+
 - **[📖 מדריך לתלמידים](./README-STUDENTS.md)** - מדריך מקיף על הפרויקט וטכנולוגיות
 - **[📁 מבנה הפרויקט](./PROJECT-STRUCTURE.md)** - הסבר מפורט על כל תיקייה וקובץ
 - **[🎯 תרגילים](./EXERCISES.md)** - 15 תרגילים מדורגים + 3 פרויקטים סופיים
 
 ### 👨‍🏫 למורים
+
 - **[👨‍🏫 מדריך למורה](./README-TEACHER.md)** - תכנית לימודים, טיפים, והמלצות
 - **[✅ TODO](./TODO.md)** - רשימת מטלות להכנת הפרויקט
 
 ### 🔧 נוספים
+
 - **[🔧 העלאה לגיטהאב](./GITHUB-SETUP.md)** - הוראות להעלאת הפרויקט לגיטהאב
 - **[📋 סיכום](./SUMMARY.md)** - סיכום כל השינויים והתאמות
 
@@ -92,11 +96,13 @@ If you want to update components using the Shadcn CLI (e.g., `npx shadcn@latest 
 ## 🚀 התחלה מהירה
 
 ### התקנת pnpm (פעם אחת)
+
 ```bash
 npm install -g pnpm
 ```
 
 ### שכפול והרצה
+
 ```bash
 # שכפול הפרויקט
 git clone https://github.com/danielboaron23/shadcn-admin.git
