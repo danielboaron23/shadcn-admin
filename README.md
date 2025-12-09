@@ -99,7 +99,7 @@ npm install -g pnpm
 ### שכפול והרצה
 ```bash
 # שכפול הפרויקט
-git clone https://github.com/[YOUR-USERNAME]/shadcn-admin.git
+git clone https://github.com/danielboaron23/shadcn-admin.git
 cd shadcn-admin
 
 # התקנת תלויות
