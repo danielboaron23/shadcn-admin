@@ -1,5 +1,10 @@
 import * as React from 'react'
 import { cn } from '@/lib/utils'
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from './popover'
 
 function Card({ className, ...props }: React.ComponentProps<'div'>) {
   return (
@@ -27,14 +32,61 @@ function CardHeader({ className, ...props }: React.ComponentProps<'div'>) {
   )
 }
 
-function CardTitle({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
+type CardTitleProps = React.ComponentProps<'div'> & {
+  popoverContent?: React.ReactNode
+  popoverTitle?: string
+}
+
+function CardTitle({ 
+  className, 
+  popoverContent,
+  popoverTitle,
+  children,
+  ...props 
+}: CardTitleProps) {
+  const titleElement = (
     <div
       data-slot='card-title'
       className={cn('leading-none font-semibold', className)}
       {...props}
-    />
+    >
+      {children}
+    </div>
   )
+
+  if (popoverContent || popoverTitle) {
+    return (
+      <Popover>
+        <PopoverTrigger asChild>
+          <button
+            type="button"
+            data-slot='card-title'
+            className={cn(
+              'leading-none font-semibold cursor-pointer hover:opacity-80 transition-opacity text-left bg-transparent border-none p-0 m-0',
+              className
+            )}
+            {...props}
+          >
+            {children}
+          </button>
+        </PopoverTrigger>
+        <PopoverContent className="w-80">
+          <div className="space-y-2">
+            {popoverTitle && (
+              <h4 className="font-medium leading-none">{popoverTitle}</h4>
+            )}
+            {popoverContent && (
+              <div className="text-sm text-muted-foreground">
+                {popoverContent}
+              </div>
+            )}
+          </div>
+        </PopoverContent>
+      </Popover>
+    )
+  }
+
+  return titleElement
 }
 
 function CardDescription({ className, ...props }: React.ComponentProps<'div'>) {
