@@ -24,5 +24,7 @@ steps:
     background: true
     ready_when:
       type: http
-      url: "http://localhost:3000"
-      timeout: "180s"
+      url: "http://localhost:5176"
+      status: 200
+      timeout: "120s"
+    success_url: "http://localhost:5176"
