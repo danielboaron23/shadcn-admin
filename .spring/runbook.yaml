@@ -1,0 +1,30 @@
+spring: "1.0"
+
+name: Project Setup
+description: Auto-generated setup recipe using pnpm
+
+prerequisites:
+  - name: Node.js
+    check: node --version
+    required: true
+  - name: pnpm
+    check: pnpm --version
+    required: true
+
+steps:
+  - name: Kill ports if in use
+    run: npx kill-port 3000 5001 || true
+    optional: true
+  - name: Copy environment file
+    run: cp .env.example .env 2>/dev/null || true
+  - name: Install dependencies
+    run: pnpm install
+  - name: Start development server
+    run: pnpm run dev
+    background: true
+    ready_when:
+      type: http
+      url: "http://localhost:5176"
+      status: 200
+      timeout: "120s"
+    success_url: "http://localhost:5176"
