@@ -66,23 +66,32 @@ export function Dashboard() {
                     popoverContent={
                       <div className='space-y-2'>
                         <p>
-                          Total revenue includes all income from sales, subscriptions, and services.
+                          Total revenue includes all income from sales,
+                          subscriptions, and services.
                         </p>
-                        <div className='pt-2 border-t'>
+                        <div className='border-t pt-2'>
                           <div className='flex justify-between text-xs'>
-                            <span className='text-muted-foreground'>Current Period:</span>
+                            <span className='text-muted-foreground'>
+                              Current Period:
+                            </span>
                             <span>$45,231.89</span>
                           </div>
-                          <div className='flex justify-between text-xs mt-1'>
-                            <span className='text-muted-foreground'>Previous Period:</span>
+                          <div className='mt-1 flex justify-between text-xs'>
+                            <span className='text-muted-foreground'>
+                              Previous Period:
+                            </span>
                             <span>$37,654.32</span>
                           </div>
-                          <div className='flex justify-between text-xs mt-1'>
-                            <span className='text-muted-foreground'>Growth:</span>
+                          <div className='mt-1 flex justify-between text-xs'>
+                            <span className='text-muted-foreground'>
+                              Growth:
+                            </span>
                             <span className='text-green-600'>+20.1%</span>
                           </div>
-                          <div className='flex justify-between text-xs mt-1'>
-                            <span className='text-muted-foreground'>Top Source:</span>
+                          <div className='mt-1 flex justify-between text-xs'>
+                            <span className='text-muted-foreground'>
+                              Top Source:
+                            </span>
                             <span>Product Sales</span>
                           </div>
                         </div>
