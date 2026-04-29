@@ -21,9 +21,26 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const MONTHS = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+]
 
-function generate(count: number, base: number, variance: number): RevenuePoint[] {
+function generate(
+  count: number,
+  base: number,
+  variance: number
+): RevenuePoint[] {
   let cursor = new Date(2026, 0, 1)
   return Array.from({ length: count }, (_, i) => {
     const date = new Date(cursor)
