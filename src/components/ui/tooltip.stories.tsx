@@ -1,10 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-} from './tooltip';
-import { Button } from './button';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Button } from './button'
+import { Tooltip, TooltipTrigger, TooltipContent } from './tooltip'
 
 const meta = {
   title: 'UI/Tooltip',
@@ -13,70 +9,70 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof Tooltip>;
+} satisfies Meta<typeof Tooltip>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: () => (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button variant="outline">Hover me</Button>
+        <Button variant='outline'>Hover me</Button>
       </TooltipTrigger>
       <TooltipContent>
         <p>Add to library</p>
       </TooltipContent>
     </Tooltip>
   ),
-};
+}
 
 export const Multiple: Story = {
   render: () => (
-    <div className="flex gap-4">
+    <div className='flex gap-4'>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="outline">Left</Button>
+          <Button variant='outline'>Left</Button>
         </TooltipTrigger>
-        <TooltipContent side="left">
+        <TooltipContent side='left'>
           <p>Tooltip on the left</p>
         </TooltipContent>
       </Tooltip>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="outline">Top</Button>
+          <Button variant='outline'>Top</Button>
         </TooltipTrigger>
-        <TooltipContent side="top">
+        <TooltipContent side='top'>
           <p>Tooltip on the top</p>
         </TooltipContent>
       </Tooltip>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="outline">Bottom</Button>
+          <Button variant='outline'>Bottom</Button>
         </TooltipTrigger>
-        <TooltipContent side="bottom">
+        <TooltipContent side='bottom'>
           <p>Tooltip on the bottom</p>
         </TooltipContent>
       </Tooltip>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="outline">Right</Button>
+          <Button variant='outline'>Right</Button>
         </TooltipTrigger>
-        <TooltipContent side="right">
+        <TooltipContent side='right'>
           <p>Tooltip on the right</p>
         </TooltipContent>
       </Tooltip>
     </div>
   ),
-};
+}
 
 export const LongContent: Story = {
   render: () => (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button variant="outline">Hover for long tooltip</Button>
+        <Button variant='outline'>Hover for long tooltip</Button>
       </TooltipTrigger>
-      <TooltipContent className="max-w-xs">
+      <TooltipContent className='max-w-xs'>
         <p>
           This is a longer tooltip that contains more information and wraps to
           multiple lines if needed.
@@ -84,5 +80,4 @@ export const LongContent: Story = {
       </TooltipContent>
     </Tooltip>
   ),
-};
-
+}
