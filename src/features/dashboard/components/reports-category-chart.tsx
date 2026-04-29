@@ -94,10 +94,7 @@ export function ReportsCategoryChart({
 
   return (
     <ResponsiveContainer width='100%' height={height}>
-      <BarChart
-        data={data}
-        margin={{ top: 8, right: 8, left: 0, bottom: 0 }}
-      >
+      <BarChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
         <XAxis
           dataKey='category'
           className='text-muted-foreground'
