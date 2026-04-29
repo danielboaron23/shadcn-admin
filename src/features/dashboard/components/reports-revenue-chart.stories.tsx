@@ -41,7 +41,7 @@ function generate(
   base: number,
   variance: number
 ): RevenuePoint[] {
-  let cursor = new Date(2026, 0, 1)
+  const cursor = new Date(2026, 0, 1)
   return Array.from({ length: count }, (_, i) => {
     const date = new Date(cursor)
     cursor.setDate(cursor.getDate() + 1)
