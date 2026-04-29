@@ -4,17 +4,17 @@ import type { DateRange } from '../lib/reports-derive'
 import { rangeForPreset, type PresetKey } from '../lib/reports-presets'
 import { ReportsDateRange } from './reports-date-range'
 
-const meta = {
+const meta: Meta<typeof ReportsDateRange> = {
   title: 'Dashboard/Reports/ReportsDateRange',
   component: ReportsDateRange,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof ReportsDateRange>
+}
 
 export default meta
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<typeof ReportsDateRange>
 
 function ControlledDateRange({ initialPreset }: { initialPreset: PresetKey }) {
   const [preset, setPreset] = useState<PresetKey>(initialPreset)
