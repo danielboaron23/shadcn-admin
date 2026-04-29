@@ -1,12 +1,7 @@
 import { TrendingDownIcon, TrendingUpIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import type { Kpis } from '../lib/reports-derive'
 
@@ -192,8 +187,8 @@ export function ReportsKpis({ kpis, loading = false }: ReportsKpisProps) {
             popoverTitle='Refund Rate'
             popoverContent={
               <p>
-                Lower is better — fewer refunds means a healthier business.
-                Down arrows are green; up arrows are red.
+                Lower is better — fewer refunds means a healthier business. Down
+                arrows are green; up arrows are red.
               </p>
             }
           >
