@@ -40,7 +40,10 @@ function addDays(d: Date, n: number) {
   return x
 }
 
-export function rangeForPreset(preset: PresetKey, now: Date = new Date()): DateRange {
+export function rangeForPreset(
+  preset: PresetKey,
+  now: Date = new Date()
+): DateRange {
   const today = startOfDay(now)
   switch (preset) {
     case 'today':
@@ -52,7 +55,10 @@ export function rangeForPreset(preset: PresetKey, now: Date = new Date()): DateR
     case 'last90':
       return { from: addDays(today, -89), to: today }
     case 'mtd':
-      return { from: new Date(today.getFullYear(), today.getMonth(), 1), to: today }
+      return {
+        from: new Date(today.getFullYear(), today.getMonth(), 1),
+        to: today,
+      }
     case 'custom':
       // Caller must supply explicit from/to when preset === 'custom'.
       return { from: addDays(today, -29), to: today }

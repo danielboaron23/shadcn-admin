@@ -52,7 +52,10 @@ function parseRowDate(iso: string) {
   return new Date(y, (m ?? 1) - 1, d ?? 1)
 }
 
-export function filterByRange(rows: ReportRow[], range: DateRange): ReportRow[] {
+export function filterByRange(
+  rows: ReportRow[],
+  range: DateRange
+): ReportRow[] {
   const from = startOfDay(range.from).getTime()
   const to = startOfDay(range.to).getTime()
   return rows.filter((r) => {
@@ -141,12 +144,23 @@ function isoKey(d: Date) {
 }
 
 const MONTHS_SHORT = [
-  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
 ]
 
 function bucketLabel(d: Date, bucket: Bucket): string {
-  if (bucket === 'month') return `${MONTHS_SHORT[d.getMonth()]} ${d.getFullYear().toString().slice(2)}`
+  if (bucket === 'month')
+    return `${MONTHS_SHORT[d.getMonth()]} ${d.getFullYear().toString().slice(2)}`
   // day / week → "MMM d"
   return `${MONTHS_SHORT[d.getMonth()]} ${d.getDate()}`
 }
@@ -190,9 +204,13 @@ export function categoryBreakdown(
   topN = 6
 ): CategorySlice[] {
   const byCat = new Map<string, number>()
-  for (const r of rows) byCat.set(r.category, (byCat.get(r.category) ?? 0) + r.revenue)
+  for (const r of rows)
+    byCat.set(r.category, (byCat.get(r.category) ?? 0) + r.revenue)
   const sorted = Array.from(byCat.entries())
-    .map(([category, revenue]) => ({ category, revenue: Math.round(revenue * 100) / 100 }))
+    .map(([category, revenue]) => ({
+      category,
+      revenue: Math.round(revenue * 100) / 100,
+    }))
     .sort((a, b) => b.revenue - a.revenue)
   return sorted.slice(0, topN)
 }
