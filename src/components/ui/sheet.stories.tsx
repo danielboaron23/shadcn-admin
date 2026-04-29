@@ -1,4 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Button } from './button'
+import { Input } from './input'
+import { Label } from './label'
 import {
   Sheet,
   SheetTrigger,
@@ -7,10 +10,7 @@ import {
   SheetFooter,
   SheetTitle,
   SheetDescription,
-} from './sheet';
-import { Button } from './button';
-import { Input } from './input';
-import { Label } from './label';
+} from './sheet'
 
 const meta = {
   title: 'UI/Sheet',
@@ -19,16 +19,16 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof Sheet>;
+} satisfies Meta<typeof Sheet>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Right: Story = {
   render: () => (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">Open Right Sheet</Button>
+        <Button variant='outline'>Open Right Sheet</Button>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
@@ -37,14 +37,14 @@ export const Right: Story = {
             Make changes to your profile here. Click save when you're done.
           </SheetDescription>
         </SheetHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid gap-2">
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" defaultValue="John Doe" />
+        <div className='grid gap-4 py-4'>
+          <div className='grid gap-2'>
+            <Label htmlFor='name'>Name</Label>
+            <Input id='name' defaultValue='John Doe' />
           </div>
-          <div className="grid gap-2">
-            <Label htmlFor="username">Username</Label>
-            <Input id="username" defaultValue="@johndoe" />
+          <div className='grid gap-2'>
+            <Label htmlFor='username'>Username</Label>
+            <Input id='username' defaultValue='@johndoe' />
           </div>
         </div>
         <SheetFooter>
@@ -53,34 +53,34 @@ export const Right: Story = {
       </SheetContent>
     </Sheet>
   ),
-};
+}
 
 export const Left: Story = {
   render: () => (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">Open Left Sheet</Button>
+        <Button variant='outline'>Open Left Sheet</Button>
       </SheetTrigger>
-      <SheetContent side="left">
+      <SheetContent side='left'>
         <SheetHeader>
           <SheetTitle>Sidebar</SheetTitle>
           <SheetDescription>This sheet opens from the left.</SheetDescription>
         </SheetHeader>
-        <div className="py-4">
+        <div className='py-4'>
           <p>Content goes here</p>
         </div>
       </SheetContent>
     </Sheet>
   ),
-};
+}
 
 export const Top: Story = {
   render: () => (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">Open Top Sheet</Button>
+        <Button variant='outline'>Open Top Sheet</Button>
       </SheetTrigger>
-      <SheetContent side="top">
+      <SheetContent side='top'>
         <SheetHeader>
           <SheetTitle>Top Sheet</SheetTitle>
           <SheetDescription>This sheet opens from the top.</SheetDescription>
@@ -88,15 +88,15 @@ export const Top: Story = {
       </SheetContent>
     </Sheet>
   ),
-};
+}
 
 export const Bottom: Story = {
   render: () => (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">Open Bottom Sheet</Button>
+        <Button variant='outline'>Open Bottom Sheet</Button>
       </SheetTrigger>
-      <SheetContent side="bottom">
+      <SheetContent side='bottom'>
         <SheetHeader>
           <SheetTitle>Bottom Sheet</SheetTitle>
           <SheetDescription>This sheet opens from the bottom.</SheetDescription>
@@ -104,5 +104,4 @@ export const Bottom: Story = {
       </SheetContent>
     </Sheet>
   ),
-};
-
+}

@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Alert, AlertTitle, AlertDescription } from './alert';
-import { AlertCircle, CheckCircle2 } from 'lucide-react';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { AlertCircle, CheckCircle2 } from 'lucide-react'
+import { Alert, AlertTitle, AlertDescription } from './alert'
 
 const meta = {
   title: 'UI/Alert',
@@ -15,10 +15,10 @@ const meta = {
       options: ['default', 'destructive'],
     },
   },
-} satisfies Meta<typeof Alert>;
+} satisfies Meta<typeof Alert>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
@@ -32,7 +32,7 @@ export const Default: Story = {
       </>
     ),
   },
-};
+}
 
 export const Destructive: Story = {
   args: {
@@ -47,7 +47,7 @@ export const Destructive: Story = {
       </>
     ),
   },
-};
+}
 
 export const Success: Story = {
   args: {
@@ -61,18 +61,15 @@ export const Success: Story = {
       </>
     ),
   },
-};
+}
 
 export const WithoutIcon: Story = {
   args: {
     children: (
       <>
         <AlertTitle>Notice</AlertTitle>
-        <AlertDescription>
-          This is an alert without an icon.
-        </AlertDescription>
+        <AlertDescription>This is an alert without an icon.</AlertDescription>
       </>
     ),
   },
-};
-
+}
