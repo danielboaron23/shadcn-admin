@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import {
   Table,
   TableBody,
@@ -8,7 +8,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from './table';
+} from './table'
 
 const meta = {
   title: 'UI/Table',
@@ -17,10 +17,10 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof Table>;
+} satisfies Meta<typeof Table>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: () => (
@@ -28,47 +28,47 @@ export const Default: Story = {
       <TableCaption>A list of your recent invoices.</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[100px]">Invoice</TableHead>
+          <TableHead className='w-[100px]'>Invoice</TableHead>
           <TableHead>Status</TableHead>
           <TableHead>Method</TableHead>
-          <TableHead className="text-right">Amount</TableHead>
+          <TableHead className='text-right'>Amount</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         <TableRow>
-          <TableCell className="font-medium">INV001</TableCell>
+          <TableCell className='font-medium'>INV001</TableCell>
           <TableCell>Paid</TableCell>
           <TableCell>Credit Card</TableCell>
-          <TableCell className="text-right">$250.00</TableCell>
+          <TableCell className='text-right'>$250.00</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell className="font-medium">INV002</TableCell>
+          <TableCell className='font-medium'>INV002</TableCell>
           <TableCell>Pending</TableCell>
           <TableCell>PayPal</TableCell>
-          <TableCell className="text-right">$150.00</TableCell>
+          <TableCell className='text-right'>$150.00</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell className="font-medium">INV003</TableCell>
+          <TableCell className='font-medium'>INV003</TableCell>
           <TableCell>Unpaid</TableCell>
           <TableCell>Bank Transfer</TableCell>
-          <TableCell className="text-right">$350.00</TableCell>
+          <TableCell className='text-right'>$350.00</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell className="font-medium">INV004</TableCell>
+          <TableCell className='font-medium'>INV004</TableCell>
           <TableCell>Paid</TableCell>
           <TableCell>Credit Card</TableCell>
-          <TableCell className="text-right">$450.00</TableCell>
+          <TableCell className='text-right'>$450.00</TableCell>
         </TableRow>
       </TableBody>
       <TableFooter>
         <TableRow>
           <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">$1,200.00</TableCell>
+          <TableCell className='text-right'>$1,200.00</TableCell>
         </TableRow>
       </TableFooter>
     </Table>
   ),
-};
+}
 
 export const Simple: Story = {
   render: () => (
@@ -82,17 +82,16 @@ export const Simple: Story = {
       </TableHeader>
       <TableBody>
         <TableRow>
-          <TableCell className="font-medium">John Doe</TableCell>
+          <TableCell className='font-medium'>John Doe</TableCell>
           <TableCell>john@example.com</TableCell>
           <TableCell>Admin</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell className="font-medium">Jane Smith</TableCell>
+          <TableCell className='font-medium'>Jane Smith</TableCell>
           <TableCell>jane@example.com</TableCell>
           <TableCell>User</TableCell>
         </TableRow>
       </TableBody>
     </Table>
   ),
-};
-
+}

@@ -1,10 +1,6 @@
 import * as React from 'react'
 import { cn } from '@/lib/utils'
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-} from './popover'
+import { Popover, PopoverTrigger, PopoverContent } from './popover'
 
 function Card({ className, ...props }: React.ComponentProps<'div'>) {
   return (
@@ -37,12 +33,12 @@ type CardTitleProps = React.ComponentProps<'div'> & {
   popoverTitle?: string
 }
 
-function CardTitle({ 
-  className, 
+function CardTitle({
+  className,
   popoverContent,
   popoverTitle,
   children,
-  ...props 
+  ...props
 }: CardTitleProps) {
   const titleElement = (
     <div
@@ -59,24 +55,24 @@ function CardTitle({
       <Popover>
         <PopoverTrigger asChild>
           <button
-            type="button"
+            type='button'
             data-slot='card-title'
             className={cn(
-              'leading-none font-semibold cursor-pointer hover:opacity-80 transition-opacity text-left bg-transparent border-none p-0 m-0',
+              'm-0 cursor-pointer border-none bg-transparent p-0 text-left leading-none font-semibold transition-opacity hover:opacity-80',
               className
             )}
-            {...props}
+            {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
           >
             {children}
           </button>
         </PopoverTrigger>
-        <PopoverContent className="w-80">
-          <div className="space-y-2">
+        <PopoverContent className='w-80'>
+          <div className='space-y-2'>
             {popoverTitle && (
-              <h4 className="font-medium leading-none">{popoverTitle}</h4>
+              <h4 className='leading-none font-medium'>{popoverTitle}</h4>
             )}
             {popoverContent && (
-              <div className="text-sm text-muted-foreground">
+              <div className='text-muted-foreground text-sm'>
                 {popoverContent}
               </div>
             )}

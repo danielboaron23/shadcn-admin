@@ -1,22 +1,22 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
   InputOTPSeparator,
-} from './input-otp';
+} from './input-otp'
 
-const meta = {
+const meta: Meta<typeof InputOTP> = {
   title: 'UI/InputOTP',
   component: InputOTP,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof InputOTP>;
+}
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof InputOTP>
 
 export const Default: Story = {
   render: () => (
@@ -31,7 +31,7 @@ export const Default: Story = {
       </InputOTPGroup>
     </InputOTP>
   ),
-};
+}
 
 export const WithSeparator: Story = {
   render: () => (
@@ -49,7 +49,7 @@ export const WithSeparator: Story = {
       </InputOTPGroup>
     </InputOTP>
   ),
-};
+}
 
 export const FourDigits: Story = {
   render: () => (
@@ -62,7 +62,7 @@ export const FourDigits: Story = {
       </InputOTPGroup>
     </InputOTP>
   ),
-};
+}
 
 export const Disabled: Story = {
   render: () => (
@@ -77,5 +77,4 @@ export const Disabled: Story = {
       </InputOTPGroup>
     </InputOTP>
   ),
-};
-
+}
