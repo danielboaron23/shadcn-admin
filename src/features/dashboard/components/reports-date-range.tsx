@@ -44,7 +44,11 @@ function formatTriggerLabel(preset: PresetKey, range: DateRange): string {
   return `${triggerFormatterWithYear.format(range.from)} – ${triggerFormatterWithYear.format(range.to)}`
 }
 
-export function ReportsDateRange({ preset, range, onChange }: ReportsDateRangeProps) {
+export function ReportsDateRange({
+  preset,
+  range,
+  onChange,
+}: ReportsDateRangeProps) {
   const [open, setOpen] = useState(false)
   const [draft, setDraft] = useState<DayPickerRange | undefined>({
     from: range.from,
@@ -96,7 +100,7 @@ export function ReportsDateRange({ preset, range, onChange }: ReportsDateRangePr
           <div
             role='listbox'
             aria-label='Date range presets'
-            className='flex flex-row gap-1 border-b p-2 sm:w-40 sm:flex-col sm:border-b-0 sm:border-e overflow-x-auto sm:overflow-visible'
+            className='flex flex-row gap-1 overflow-x-auto border-b p-2 sm:w-40 sm:flex-col sm:overflow-visible sm:border-e sm:border-b-0'
           >
             {PRESET_KEYS.map((key) => {
               const active = key === preset
@@ -110,12 +114,17 @@ export function ReportsDateRange({ preset, range, onChange }: ReportsDateRangePr
                   className={cn(
                     'flex w-full shrink-0 items-center justify-between rounded-md px-2 py-1.5 text-sm whitespace-nowrap transition-colors',
                     'hover:bg-accent hover:text-accent-foreground',
-                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                    'focus-visible:ring-ring focus-visible:ring-2 focus-visible:outline-none',
                     active && 'bg-accent text-accent-foreground font-medium'
                   )}
                 >
                   <span>{PRESET_LABELS[key]}</span>
-                  {active && <CheckIcon className='ms-2 h-3.5 w-3.5' aria-hidden='true' />}
+                  {active && (
+                    <CheckIcon
+                      className='ms-2 h-3.5 w-3.5'
+                      aria-hidden='true'
+                    />
+                  )}
                 </button>
               )
             })}
