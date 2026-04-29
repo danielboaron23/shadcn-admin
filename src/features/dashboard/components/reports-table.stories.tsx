@@ -3,17 +3,17 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { ReportRow } from '../data/reports'
 import { ReportsTable } from './reports-table'
 
-const meta = {
+const meta: Meta<typeof ReportsTable> = {
   title: 'Dashboard/Reports/ReportsTable',
   component: ReportsTable,
   parameters: {
     layout: 'padded',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof ReportsTable>
+}
 
 export default meta
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<typeof ReportsTable>
 
 const sampleRows: ReportRow[] = [
   {
