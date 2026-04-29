@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Button } from './button'
 import {
   Card,
   CardHeader,
@@ -7,8 +8,7 @@ import {
   CardDescription,
   CardContent,
   CardAction,
-} from './card';
-import { Button } from './button';
+} from './card'
 
 const meta = {
   title: 'UI/Card',
@@ -17,10 +17,10 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof Card>;
+} satisfies Meta<typeof Card>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
@@ -39,7 +39,7 @@ export const Default: Story = {
       </>
     ),
   },
-};
+}
 
 export const WithAction: Story = {
   args: {
@@ -49,7 +49,7 @@ export const WithAction: Story = {
           <CardTitle>Card with Action</CardTitle>
           <CardDescription>This card has an action button</CardDescription>
           <CardAction>
-            <Button variant="ghost" size="sm">
+            <Button variant='ghost' size='sm'>
               ⋮
             </Button>
           </CardAction>
@@ -60,7 +60,7 @@ export const WithAction: Story = {
       </>
     ),
   },
-};
+}
 
 export const Simple: Story = {
   args: {
@@ -70,7 +70,7 @@ export const Simple: Story = {
       </CardContent>
     ),
   },
-};
+}
 
 export const WithMultipleActions: Story = {
   args: {
@@ -83,38 +83,39 @@ export const WithMultipleActions: Story = {
         <CardContent>
           <p>This card has multiple action buttons in the footer.</p>
         </CardContent>
-        <CardFooter className="gap-2">
-          <Button variant="outline">Cancel</Button>
+        <CardFooter className='gap-2'>
+          <Button variant='outline'>Cancel</Button>
           <Button>Save</Button>
         </CardFooter>
       </>
     ),
   },
-};
+}
 
 export const WithPopoverTitle: Story = {
   render: () => (
-    <Card className="min-w-[300px]">
+    <Card className='min-w-[300px]'>
       <CardHeader>
         <CardTitle
-          popoverTitle="Card Information"
+          popoverTitle='Card Information'
           popoverContent={
-            <div className="space-y-2">
+            <div className='space-y-2'>
               <p>
-                This card displays user analytics data. Click on the title to see more details.
+                This card displays user analytics data. Click on the title to
+                see more details.
               </p>
-              <div className="pt-2 border-t">
-                <div className="flex justify-between text-xs">
-                  <span className="text-muted-foreground">Created:</span>
+              <div className='border-t pt-2'>
+                <div className='flex justify-between text-xs'>
+                  <span className='text-muted-foreground'>Created:</span>
                   <span>January 15, 2024</span>
                 </div>
-                <div className="flex justify-between text-xs mt-1">
-                  <span className="text-muted-foreground">Last Updated:</span>
+                <div className='mt-1 flex justify-between text-xs'>
+                  <span className='text-muted-foreground'>Last Updated:</span>
                   <span>March 22, 2024</span>
                 </div>
-                <div className="flex justify-between text-xs mt-1">
-                  <span className="text-muted-foreground">Status:</span>
-                  <span className="text-green-600">Active</span>
+                <div className='mt-1 flex justify-between text-xs'>
+                  <span className='text-muted-foreground'>Status:</span>
+                  <span className='text-green-600'>Active</span>
                 </div>
               </div>
             </div>
@@ -125,14 +126,16 @@ export const WithPopoverTitle: Story = {
         <CardDescription>Click the title to view card details</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="space-y-4">
+        <div className='space-y-4'>
           <div>
-            <p className="text-sm text-muted-foreground mb-2">Total Users</p>
-            <p className="text-2xl font-bold">12,543</p>
+            <p className='text-muted-foreground mb-2 text-sm'>Total Users</p>
+            <p className='text-2xl font-bold'>12,543</p>
           </div>
           <div>
-            <p className="text-sm text-muted-foreground mb-2">Active Sessions</p>
-            <p className="text-2xl font-bold">3,247</p>
+            <p className='text-muted-foreground mb-2 text-sm'>
+              Active Sessions
+            </p>
+            <p className='text-2xl font-bold'>3,247</p>
           </div>
         </div>
       </CardContent>
@@ -141,5 +144,4 @@ export const WithPopoverTitle: Story = {
       </CardFooter>
     </Card>
   ),
-};
-
+}
