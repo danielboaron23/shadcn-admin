@@ -60,7 +60,10 @@ export const reportsColumns: ColumnDef<ReportRow>[] = [
     cell: ({ row }) => {
       const channel = row.getValue('channel') as ReportRow['channel']
       return (
-        <Badge variant='outline' className={cn('capitalize', channelTone[channel])}>
+        <Badge
+          variant='outline'
+          className={cn('capitalize', channelTone[channel])}
+        >
           {channel}
         </Badge>
       )
@@ -86,7 +89,9 @@ export const reportsColumns: ColumnDef<ReportRow>[] = [
       <DataTableColumnHeader column={column} title='Units' />
     ),
     cell: ({ row }) => (
-      <div className='tabular-nums'>{integer.format(row.getValue('units'))}</div>
+      <div className='tabular-nums'>
+        {integer.format(row.getValue('units'))}
+      </div>
     ),
   },
   {
@@ -95,7 +100,7 @@ export const reportsColumns: ColumnDef<ReportRow>[] = [
       <DataTableColumnHeader column={column} title='Revenue' />
     ),
     cell: ({ row }) => (
-      <div className='tabular-nums font-medium'>
+      <div className='font-medium tabular-nums'>
         {currency.format(row.getValue('revenue'))}
       </div>
     ),

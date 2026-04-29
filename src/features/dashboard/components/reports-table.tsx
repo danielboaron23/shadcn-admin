@@ -76,7 +76,9 @@ export function ReportsTable({
     navigate,
     pagination: { defaultPage: 1, defaultPageSize: 25 },
     globalFilter: { enabled: false },
-    columnFilters: [{ columnId: 'channel', searchKey: 'channel', type: 'array' }],
+    columnFilters: [
+      { columnId: 'channel', searchKey: 'channel', type: 'array' },
+    ],
   })
 
   // eslint-disable-next-line react-hooks/incompatible-library
@@ -113,9 +115,7 @@ export function ReportsTable({
       .getSortedRowModel()
       .rows.filter((row) => {
         // Apply column filters via TanStack's pre-filtered model
-        return table
-          .getFilteredRowModel()
-          .rows.some((r) => r.id === row.id)
+        return table.getFilteredRowModel().rows.some((r) => r.id === row.id)
       })
       .map((r) => r.original)
 
