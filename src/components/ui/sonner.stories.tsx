@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Toaster } from './sonner';
-import { Button } from './button';
-import { toast } from 'sonner';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { toast } from 'sonner'
+import { Button } from './button'
+import { Toaster } from './sonner'
 
 const meta = {
   title: 'UI/Sonner',
@@ -10,39 +10,29 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof Toaster>;
+} satisfies Meta<typeof Toaster>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: () => (
     <>
       <Toaster />
-      <div className="flex flex-col gap-4">
-        <Button
-          onClick={() => toast('Event has been created')}
-        >
+      <div className='flex flex-col gap-4'>
+        <Button onClick={() => toast('Event has been created')}>
           Show Toast
         </Button>
-        <Button
-          onClick={() => toast.success('Event has been created')}
-        >
+        <Button onClick={() => toast.success('Event has been created')}>
           Success Toast
         </Button>
-        <Button
-          onClick={() => toast.error('Event creation failed')}
-        >
+        <Button onClick={() => toast.error('Event creation failed')}>
           Error Toast
         </Button>
-        <Button
-          onClick={() => toast.info('New update available')}
-        >
+        <Button onClick={() => toast.info('New update available')}>
           Info Toast
         </Button>
-        <Button
-          onClick={() => toast.warning('Please check your input')}
-        >
+        <Button onClick={() => toast.warning('Please check your input')}>
           Warning Toast
         </Button>
         <Button
@@ -69,5 +59,4 @@ export const Default: Story = {
       </div>
     </>
   ),
-};
-
+}

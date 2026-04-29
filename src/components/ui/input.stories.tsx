@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Input } from './input';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Input } from './input'
 
 const meta = {
   title: 'UI/Input',
@@ -20,37 +20,37 @@ const meta = {
       control: 'text',
     },
   },
-} satisfies Meta<typeof Input>;
+} satisfies Meta<typeof Input>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
     placeholder: 'Enter your email',
   },
-};
+}
 
 export const Password: Story = {
   args: {
     type: 'password',
     placeholder: 'Enter your password',
   },
-};
+}
 
 export const Email: Story = {
   args: {
     type: 'email',
     placeholder: 'name@example.com',
   },
-};
+}
 
 export const Number: Story = {
   args: {
     type: 'number',
     placeholder: 'Enter a number',
   },
-};
+}
 
 export const Disabled: Story = {
   args: {
@@ -58,13 +58,13 @@ export const Disabled: Story = {
     placeholder: 'Disabled input',
     defaultValue: 'Cannot edit',
   },
-};
+}
 
 export const WithValue: Story = {
   args: {
     defaultValue: 'john.doe@example.com',
   },
-};
+}
 
 export const Invalid: Story = {
   args: {
@@ -72,5 +72,4 @@ export const Invalid: Story = {
     placeholder: 'Invalid input',
     defaultValue: 'invalid@',
   },
-};
-
+}
