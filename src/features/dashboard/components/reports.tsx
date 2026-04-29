@@ -1,8 +1,5 @@
 import { BarChart3Icon } from 'lucide-react'
-import {
-  Card,
-  CardContent,
-} from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 
 export function Reports() {
   return (
