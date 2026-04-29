@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Button } from './button'
 import {
   Dialog,
   DialogTrigger,
@@ -7,8 +8,7 @@ import {
   DialogFooter,
   DialogTitle,
   DialogDescription,
-} from './dialog';
-import { Button } from './button';
+} from './dialog'
 
 const meta = {
   title: 'UI/Dialog',
@@ -17,10 +17,10 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof Dialog>;
+} satisfies Meta<typeof Dialog>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: () => (
@@ -37,19 +37,19 @@ export const Default: Story = {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button variant="outline">Cancel</Button>
+          <Button variant='outline'>Cancel</Button>
           <Button>Continue</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   ),
-};
+}
 
 export const Simple: Story = {
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Open Simple Dialog</Button>
+        <Button variant='outline'>Open Simple Dialog</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -61,7 +61,7 @@ export const Simple: Story = {
       </DialogContent>
     </Dialog>
   ),
-};
+}
 
 export const WithoutCloseButton: Story = {
   render: () => (
@@ -82,5 +82,4 @@ export const WithoutCloseButton: Story = {
       </DialogContent>
     </Dialog>
   ),
-};
-
+}
