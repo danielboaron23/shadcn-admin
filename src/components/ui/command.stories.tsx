@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useState } from 'react';
+import { useState } from 'react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Button } from './button'
 import {
   Command,
   CommandDialog,
@@ -9,8 +10,7 @@ import {
   CommandGroup,
   CommandItem,
   CommandSeparator,
-} from './command';
-import { Button } from './button';
+} from './command'
 
 const meta = {
   title: 'UI/Command',
@@ -19,24 +19,24 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof Command>;
+} satisfies Meta<typeof Command>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: () => (
-    <Command className="rounded-lg border shadow-md w-[450px]">
-      <CommandInput placeholder="Type a command or search..." />
+    <Command className='w-[450px] rounded-lg border shadow-md'>
+      <CommandInput placeholder='Type a command or search...' />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
-        <CommandGroup heading="Suggestions">
+        <CommandGroup heading='Suggestions'>
           <CommandItem>Calendar</CommandItem>
           <CommandItem>Search Emoji</CommandItem>
           <CommandItem>Calculator</CommandItem>
         </CommandGroup>
         <CommandSeparator />
-        <CommandGroup heading="Settings">
+        <CommandGroup heading='Settings'>
           <CommandItem>Profile</CommandItem>
           <CommandItem>Billing</CommandItem>
           <CommandItem>Settings</CommandItem>
@@ -44,25 +44,25 @@ export const Default: Story = {
       </CommandList>
     </Command>
   ),
-};
+}
 
 export const Dialog: Story = {
   render: () => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false)
     return (
       <>
         <Button onClick={() => setOpen(true)}>Open Command</Button>
         <CommandDialog open={open} onOpenChange={setOpen}>
-          <CommandInput placeholder="Type a command or search..." />
+          <CommandInput placeholder='Type a command or search...' />
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
-            <CommandGroup heading="Suggestions">
+            <CommandGroup heading='Suggestions'>
               <CommandItem>Calendar</CommandItem>
               <CommandItem>Search Emoji</CommandItem>
               <CommandItem>Calculator</CommandItem>
             </CommandGroup>
             <CommandSeparator />
-            <CommandGroup heading="Settings">
+            <CommandGroup heading='Settings'>
               <CommandItem>Profile</CommandItem>
               <CommandItem>Billing</CommandItem>
               <CommandItem>Settings</CommandItem>
@@ -70,7 +70,6 @@ export const Dialog: Story = {
           </CommandList>
         </CommandDialog>
       </>
-    );
+    )
   },
-};
-
+}
