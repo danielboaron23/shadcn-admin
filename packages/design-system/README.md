@@ -1,4 +1,4 @@
-# @yourcompany/design-system
+# @designai/design-system
 
 A production-grade Design System package extracted from shadcn-admin, built for Figma Make compatibility and private npm registry distribution.
 
@@ -6,20 +6,20 @@ A production-grade Design System package extracted from shadcn-admin, built for 
 
 ```bash
 # From workspace (development)
-pnpm add @yourcompany/design-system@workspace:*
+pnpm add @designai/design-system@workspace:*
 
 # From private npm registry (production)
-pnpm add @yourcompany/design-system
+pnpm add @designai/design-system
 ```
 
 ## 🚀 Quick Start
 
 ```typescript
 // Import components
-import { Button, Input, Card } from '@yourcompany/design-system'
+import { Button, Input, Card } from '@designai/design-system'
 
 // Import styles (required)
-import '@yourcompany/design-system/styles'
+import '@designai/design-system/styles'
 
 // Use components
 function App() {
@@ -102,7 +102,7 @@ import '@yourcompany/design-system/styles'
 ### Basic Form
 
 ```typescript
-import { Button, Input, Label, Card } from '@yourcompany/design-system'
+import { Button, Input, Label, Card } from '@designai/design-system'
 
 function LoginForm() {
   return (
@@ -135,7 +135,7 @@ import {
   Button,
   Input,
   Label
-} from '@yourcompany/design-system'
+} from '@designai/design-system'
 
 function CreateUserDialog() {
   return (
@@ -170,8 +170,8 @@ import {
   TableHead,
   TableHeader,
   TableRow
-} from '@yourcompany/design-system'
-import { Pagination, Toolbar } from '@yourcompany/design-system/extended'
+} from '@designai/design-system'
+import { Pagination, Toolbar } from '@designai/design-system/extended'
 
 function UsersTable({ data, table }) {
   return (
@@ -202,7 +202,7 @@ function UsersTable({ data, table }) {
 ### Theme Switch (Extended)
 
 ```typescript
-import { ThemeSwitch } from '@yourcompany/design-system/extended'
+import { ThemeSwitch } from '@designai/design-system/extended'
 import { useTheme } from './your-theme-provider'
 
 function Header() {
@@ -225,17 +225,17 @@ All components use named exports (required by Figma Make):
 
 ```typescript
 // ✅ Correct
-import { Button, Input } from '@yourcompany/design-system'
+import { Button, Input } from '@designai/design-system'
 
 // ❌ Incorrect
-import Button from '@yourcompany/design-system/button'
+import Button from '@designai/design-system/button'
 ```
 
 ### TypeScript Interfaces
 All component props are exported as TypeScript interfaces:
 
 ```typescript
-import type { ButtonProps } from '@yourcompany/design-system'
+import type { ButtonProps } from '@designai/design-system'
 
 const customButton: ButtonProps = {
   variant: 'outline',
@@ -275,16 +275,16 @@ OKLCH color tokens can be mapped to Figma variables:
 
 ```typescript
 // Main export (all core components)
-import { Button, Input, ... } from '@yourcompany/design-system'
+import { Button, Input, ... } from '@designai/design-system'
 
 // Core only
-import { Button } from '@yourcompany/design-system/core'
+import { Button } from '@designai/design-system/core'
 
 // Extended only
-import { Pagination, ThemeSwitch } from '@yourcompany/design-system/extended'
+import { Pagination, ThemeSwitch } from '@designai/design-system/extended'
 
 // Styles
-import '@yourcompany/design-system/styles'
+import '@designai/design-system/styles'
 ```
 
 ## 🏗️ Build Output
@@ -301,7 +301,7 @@ import '@yourcompany/design-system/styles'
 Create `.npmrc` in your project root:
 
 ```ini
-@yourcompany:registry=https://your-private-registry.com
+@designai:registry=https://your-private-registry.com
 //your-private-registry.com/:_authToken=${NPM_TOKEN}
 ```
 
@@ -315,7 +315,7 @@ pnpm publish --access restricted
 ### 3. Install in Other Projects
 
 ```bash
-pnpm add @yourcompany/design-system
+pnpm add @designai/design-system
 ```
 
 ## 🛠️ Development
@@ -362,7 +362,7 @@ All component names are preserved exactly as in the original shadcn/ui implement
 ### Extend Components
 
 ```typescript
-import { Button, type ButtonProps } from '@yourcompany/design-system'
+import { Button, type ButtonProps } from '@designai/design-system'
 
 interface CustomButtonProps extends ButtonProps {
   loading?: boolean
