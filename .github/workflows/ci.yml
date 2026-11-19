@@ -25,6 +25,10 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
+      - name: Configure pnpm build approvals
+        run: |
+          pnpm config set only-built-dependencies '["@clerk/shared","@swc/core","esbuild"]'
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
