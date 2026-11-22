@@ -43,7 +43,7 @@ export function ArticleView({ article }: ArticleViewProps) {
 
       {category && (
         <Badge variant='secondary' className='mt-6'>
-          {category.title}
+          <bdi>{category.title}</bdi>
         </Badge>
       )}
       <h1
@@ -51,21 +51,21 @@ export function ArticleView({ article }: ArticleViewProps) {
         tabIndex={-1}
         className='mt-3 text-3xl font-bold tracking-tight wrap-break-word outline-none'
       >
-        {article.title}
+        <bdi>{article.title}</bdi>
       </h1>
       <div className='text-muted-foreground mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm'>
         <span className='flex items-center gap-1.5'>
           <Calendar aria-hidden='true' className='size-4' />
-          <span>
+          <bdi>
             Updated{' '}
             <time dateTime={article.updatedAt}>
               {formatUpdatedAt(article.updatedAt)}
             </time>
-          </span>
+          </bdi>
         </span>
         <span className='flex items-center gap-1.5'>
           <Clock aria-hidden='true' className='size-4' />
-          {formatReadingTime(article.readingMinutes)}
+          <bdi>{formatReadingTime(article.readingMinutes)}</bdi>
         </span>
       </div>
 
@@ -73,7 +73,9 @@ export function ArticleView({ article }: ArticleViewProps) {
 
       <div className='flex flex-col gap-4 text-base leading-7'>
         {article.body.split('\n\n').map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
+          <p key={paragraph}>
+            <bdi>{paragraph}</bdi>
+          </p>
         ))}
       </div>
 

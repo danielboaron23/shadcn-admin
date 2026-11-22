@@ -41,7 +41,7 @@ export function CategoryChips({
       className={cn('flex flex-wrap items-center gap-2', className)}
     >
       <span id={labelId} className='text-muted-foreground text-sm'>
-        Or browse:
+        <bdi>Or browse:</bdi>
       </span>
       {helpCategories.map((category) => {
         const isSelected = category.id === selected
@@ -55,7 +55,7 @@ export function CategoryChips({
             data-category={category.id}
             onClick={() => onToggle(category.id)}
           >
-            {category.title}
+            <bdi>{category.title}</bdi>
           </Button>
         )
       })}

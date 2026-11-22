@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { getRouteApi } from '@tanstack/react-router'
 import { ConfigDrawer } from '@/components/config-drawer'
 import { Header } from '@/components/layout/header'
@@ -16,6 +17,12 @@ export function HelpCenter() {
   // An unknown slug finds nothing and falls back to the list.
   const article = getArticle(articleSlug)
 
+  // Remember the open article so the list can return focus to its link.
+  const lastArticleRef = useRef<string | null>(null)
+  useEffect(() => {
+    if (article) lastArticleRef.current = article.slug
+  }, [article])
+
   return (
     <>
       <Header fixed>
@@ -28,7 +35,11 @@ export function HelpCenter() {
       </Header>
 
       <Main className='flex flex-1 flex-col items-center pt-0 pb-12'>
-        {article ? <ArticleView article={article} /> : <HelpCenterHome />}
+        {article ? (
+          <ArticleView article={article} />
+        ) : (
+          <HelpCenterHome returnFocusRef={lastArticleRef} />
+        )}
       </Main>
     </>
   )

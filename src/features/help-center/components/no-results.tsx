@@ -20,8 +20,10 @@ export function NoResults({ query, onClear }: NoResultsProps) {
         No matching articles
       </h2>
       <p className='text-muted-foreground mt-1.5 max-w-95 text-sm wrap-break-word'>
-        Nothing matches “{query}”. Check the spelling, or try a broader word
-        like “plan” or “invoice”.
+        <bdi>
+          Nothing matches “{query}”. Check the spelling, or try a broader word
+          like “plan” or “invoice”.
+        </bdi>
       </p>
       <Button variant='outline' className='mt-5' onClick={onClear}>
         <X aria-hidden='true' />

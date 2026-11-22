@@ -19,6 +19,7 @@ export function ArticleList({ articles }: ArticleListProps) {
             <Link
               to='/help-center'
               search={(prev) => ({ ...prev, article: article.slug })}
+              data-article={article.slug}
               className='hover:bg-muted/50 focus-visible:ring-ring/50 flex min-h-25 items-center gap-4 px-4 py-3.5 transition-colors outline-none focus-visible:ring-[3px] focus-visible:ring-inset'
             >
               <span
@@ -29,17 +30,23 @@ export function ArticleList({ articles }: ArticleListProps) {
               </span>
               <span className='flex min-w-0 flex-1 flex-col gap-0.5 text-sm'>
                 <span className='font-medium wrap-break-word'>
-                  {article.title}
+                  <bdi>{article.title}</bdi>
                 </span>
-                <span className='text-muted-foreground sm:truncate'>
+                {/* This line is cut with an ellipsis, so it takes the text's
+                    own direction to cut at the end of the sentence, and is
+                    aligned back to the RTL side by hand. */}
+                <span
+                  dir='auto'
+                  className='text-muted-foreground sm:truncate rtl:text-right'
+                >
                   {article.summary}
                 </span>
               </span>
               <Badge variant='outline' className='hidden sm:inline-flex'>
-                {getCategory(article.categoryId)?.title}
+                <bdi>{getCategory(article.categoryId)?.title}</bdi>
               </Badge>
               <span className='text-muted-foreground hidden text-xs whitespace-nowrap sm:inline'>
-                {formatReadingTime(article.readingMinutes)}
+                <bdi>{formatReadingTime(article.readingMinutes)}</bdi>
               </span>
               <ChevronRight
                 aria-hidden='true'

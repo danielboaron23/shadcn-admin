@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { getRouteApi } from '@tanstack/react-router'
 import { cn } from '@/lib/utils'
 import { type HelpCategoryId, helpArticles } from '../data/articles'
@@ -13,9 +13,19 @@ const route = getRouteApi('/_authenticated/help-center/')
 
 const HEADING_ID = 'help-center-heading'
 
-export function HelpCenterHome() {
+type HelpCenterHomeProps = {
+  /**
+   * Slug of the article that was open just before this list. When set, the
+   * list hands keyboard focus back to that article's link on mount.
+   */
+  returnFocusRef: React.RefObject<string | null>
+}
+
+export function HelpCenterHome({ returnFocusRef }: HelpCenterHomeProps) {
   const search = route.useSearch()
   const navigate = route.useNavigate()
+  const rootRef = useRef<HTMLDivElement>(null)
+  const headingRef = useRef<HTMLHeadingElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const chipFocusRef = useRef<HelpCategoryId | null>(null)
 
@@ -30,6 +40,19 @@ export function HelpCenterHome() {
   } else if (urlQuery !== value) {
     setValue(urlQuery)
   }
+
+  // Coming back from an article: focus the link that opened it, or the page
+  // heading if that link is not in the current list.
+  useEffect(() => {
+    const slug = returnFocusRef.current
+    if (!slug) return
+    returnFocusRef.current = null
+    const link = rootRef.current?.querySelector<HTMLAnchorElement>(
+      `a[data-article='${slug}']`
+    )
+    const target = link ?? headingRef.current
+    target?.focus()
+  }, [returnFocusRef])
 
   const query = urlQuery.trim()
   const isSearching = query.length > 0
@@ -84,6 +107,7 @@ export function HelpCenterHome() {
 
   return (
     <div
+      ref={rootRef}
       className={cn(
         'flex w-full max-w-180 flex-col items-center transition-[padding] duration-200 motion-reduce:transition-none',
         isSearching ? 'pt-8 sm:pt-16' : 'pt-10 sm:pt-24'
@@ -92,14 +116,19 @@ export function HelpCenterHome() {
       <p className='text-muted-foreground text-xs font-medium tracking-wider uppercase'>
         Help Center
       </p>
+      {/* <bdi> keeps each string in its own reading direction, so English
+          punctuation and numbers stay on the correct side in RTL while the
+          layout still mirrors. */}
       <h1
+        ref={headingRef}
         id={HEADING_ID}
-        className='mt-3 text-center text-3xl font-bold tracking-tight sm:text-4xl'
+        tabIndex={-1}
+        className='mt-3 text-center text-3xl font-bold tracking-tight outline-none sm:text-4xl'
       >
-        How can we help?
+        <bdi>How can we help?</bdi>
       </h1>
       <p className='text-muted-foreground mt-2 mb-7 text-center text-base'>
-        Search {helpArticles.length} articles, or start from a topic.
+        <bdi>Search {helpArticles.length} articles, or start from a topic.</bdi>
       </p>
       <HelpSearchField
         value={value}
@@ -124,7 +153,7 @@ export function HelpCenterHome() {
             aria-hidden='true'
             className='text-muted-foreground max-w-full text-sm wrap-break-word'
           >
-            {resultCount}
+            <bdi>{resultCount}</bdi>
           </p>
           {articles.length > 0 ? (
             <ArticleList articles={articles} />
@@ -147,10 +176,10 @@ export function HelpCenterHome() {
                     id='help-category-heading'
                     className='text-muted-foreground font-semibold'
                   >
-                    {category.title}
+                    <bdi>{category.title}</bdi>
                   </h2>
                   <p className='text-muted-foreground'>
-                    {category.description}
+                    <bdi>{category.description}</bdi>
                   </p>
                 </div>
                 <ArticleList articles={articles} />

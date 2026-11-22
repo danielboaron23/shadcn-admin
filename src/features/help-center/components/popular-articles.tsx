@@ -23,10 +23,10 @@ export function PopularArticles() {
             <Card className='hover:bg-muted/50 has-[a:focus-visible]:border-ring has-[a:focus-visible]:ring-ring/50 relative h-full gap-2 p-5 shadow-xs transition-colors has-[a:focus-visible]:ring-[3px]'>
               <div className='text-muted-foreground flex items-center gap-2 text-xs'>
                 <span className='flex-1 font-medium'>
-                  {getCategory(article.categoryId)?.title}
+                  <bdi>{getCategory(article.categoryId)?.title}</bdi>
                 </span>
                 <span className='whitespace-nowrap'>
-                  {formatReadingTime(article.readingMinutes)}
+                  <bdi>{formatReadingTime(article.readingMinutes)}</bdi>
                 </span>
               </div>
               <h3 className='text-base font-semibold tracking-tight wrap-break-word'>
@@ -34,12 +34,15 @@ export function PopularArticles() {
                 <Link
                   to='/help-center'
                   search={(prev) => ({ ...prev, article: article.slug })}
+                  data-article={article.slug}
                   className='outline-none after:absolute after:inset-0 after:rounded-xl'
                 >
-                  {article.title}
+                  <bdi>{article.title}</bdi>
                 </Link>
               </h3>
-              <p className='text-muted-foreground text-sm'>{article.summary}</p>
+              <p className='text-muted-foreground text-sm'>
+                <bdi>{article.summary}</bdi>
+              </p>
             </Card>
           </li>
         ))}
