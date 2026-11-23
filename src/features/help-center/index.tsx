@@ -1,10 +1,8 @@
 import { useRef, useState } from 'react'
 import { getRouteApi } from '@tanstack/react-router'
-import { RotateCcw, SearchX } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { EmptyResults } from '@/components/empty-results'
 import { ArticleList } from './components/article-list'
 import { HelpCenterLayout } from './components/help-center-layout'
-import { HelpEmptyState } from './components/help-empty-state'
 import { HelpHero } from './components/help-hero'
 import { type HelpCategoryId } from './data/articles'
 import { findArticles, formatCount, getCategoryTitle } from './data/utils'
@@ -78,29 +76,24 @@ export function HelpCenter() {
           </p>
         </div>
 
-        {articles.length > 0 ? (
-          <ArticleList articles={articles} />
-        ) : term ? (
-          <HelpEmptyState
-            icon={SearchX}
-            title={`No articles match “${term}”${categoryTitle ? ` in ${categoryTitle}` : ''}`}
-            description='Try another word, or search all topics. Clearing resets the search and the topic filter.'
-          >
-            <Button variant='outline' onClick={handleReset}>
-              <RotateCcw aria-hidden='true' />
-              Clear search and filters
-            </Button>
-          </HelpEmptyState>
-        ) : (
-          <HelpEmptyState
-            icon={SearchX}
-            title={`No articles in ${categoryTitle} yet`}
-          >
-            <Button variant='outline' onClick={handleReset}>
-              Show all articles
-            </Button>
-          </HelpEmptyState>
-        )}
+        {articles.length > 0 && <ArticleList articles={articles} />}
+        {/* Stays mounted so screen readers announce it when it appears. */}
+        <EmptyResults
+          show={articles.length === 0}
+          bordered
+          title={
+            term
+              ? `No articles match “${term}”${categoryTitle ? ` in ${categoryTitle}` : ''}`
+              : `No articles in ${categoryTitle} yet`
+          }
+          message={
+            term
+              ? 'Try another word, or search all topics. Clearing resets the search and the topic filter.'
+              : undefined
+          }
+          actionLabel={term ? undefined : 'Show all articles'}
+          onAction={handleReset}
+        />
       </section>
     </HelpCenterLayout>
   )

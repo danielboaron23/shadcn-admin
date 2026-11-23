@@ -4,9 +4,9 @@ import { ArrowLeft, Calendar, Clock, FileX } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { EmptyResults } from '@/components/empty-results'
 import { ArticleCard } from '../components/article-card'
 import { HelpCenterLayout } from '../components/help-center-layout'
-import { HelpEmptyState } from '../components/help-empty-state'
 import { HelpHero } from '../components/help-hero'
 import { HelpSearchField } from '../components/help-search-field'
 import { type HelpArticle, type HelpCategoryId } from '../data/articles'
@@ -55,9 +55,9 @@ function useListSearch() {
   return { query, setQuery, openList }
 }
 
-function BackToHelpCenter({ variant }: { variant: 'ghost' | 'outline' }) {
+function BackToHelpCenter() {
   return (
-    <Button variant={variant} asChild>
+    <Button variant='ghost' asChild>
       <Link to='/help-center'>
         <ArrowLeft aria-hidden='true' className='rtl:rotate-180' />
         Back to Help Center
@@ -73,7 +73,7 @@ function ArticleView({ article }: { article: HelpArticle }) {
   return (
     <div className='mx-auto flex w-full max-w-4xl flex-col gap-6'>
       <div className='flex flex-wrap items-center justify-between gap-3'>
-        <BackToHelpCenter variant='ghost' />
+        <BackToHelpCenter />
         <HelpSearchField
           className='sm:w-80'
           value={query}
@@ -140,6 +140,7 @@ function ArticleView({ article }: { article: HelpArticle }) {
 }
 
 function ArticleNotFound() {
+  const navigate = route.useNavigate()
   const { query, setQuery, openList } = useListSearch()
 
   return (
@@ -150,16 +151,16 @@ function ArticleNotFound() {
         onQuerySubmit={() => openList()}
         onCategoryChange={openList}
       />
-      <div className='mx-auto w-full max-w-4xl'>
-        <HelpEmptyState
-          icon={FileX}
-          headingLevel='h2'
-          title='This article isn’t available'
-          description='The link may be old, or the article was renamed. Search above, or go back to all articles.'
-        >
-          <BackToHelpCenter variant='outline' />
-        </HelpEmptyState>
-      </div>
+      <EmptyResults
+        show
+        bordered
+        className='mx-auto w-full max-w-4xl'
+        icon={FileX}
+        title='This article isn’t available'
+        message='The link may be old, or the article was renamed. Search above, or go back to all articles.'
+        actionLabel='Back to Help Center'
+        onAction={() => navigate({ to: '/help-center' })}
+      />
     </>
   )
 }
