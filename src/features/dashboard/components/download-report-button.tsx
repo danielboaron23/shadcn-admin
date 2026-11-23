@@ -65,7 +65,7 @@ export function DownloadReportButton() {
     try {
       const csv = buildReportCsv(report)
       await sleep(MIN_LOADING_MS)
-      saveCsvFile(csv, getReportFileName(report.period))
+      saveCsvFile(csv, getReportFileName())
       setStatus('success')
       resetTimer.current = setTimeout(() => setStatus('idle'), SUCCESS_MS)
     } catch {

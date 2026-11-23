@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import {
   type DashboardKpi,
   type MonthlyRevenue,
@@ -5,7 +6,7 @@ import {
 } from './report'
 
 export type DashboardReport = {
-  period: { label: string; start: string }
+  period: { label: string }
   kpis: DashboardKpi[]
   monthlyRevenue: MonthlyRevenue[]
   recentSales: RecentSale[]
@@ -50,7 +51,7 @@ export function buildReportCsv(report: DashboardReport) {
   return rows.map((row) => row.map(escapeCsvCell).join(',')).join('\r\n')
 }
 
-/** `dashboard-report-YYYY-MM.csv`, from the month the report covers. */
-export function getReportFileName(period: DashboardReport['period']) {
-  return `dashboard-report-${period.start.slice(0, 7)}.csv`
+/** `report-YYYY-MM-DD.csv`, using today's date in the user's time zone. */
+export function getReportFileName(date: Date = new Date()) {
+  return `report-${format(date, 'yyyy-MM-dd')}.csv`
 }
