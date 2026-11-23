@@ -21,11 +21,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import {
-  DataTablePagination,
-  DataTableToolbar,
-  EmptyResults,
-} from '@/components/data-table'
+import { DataTablePagination, DataTableToolbar } from '@/components/data-table'
+import { EmptyResults, EmptyResultsMessage } from '@/components/empty-results'
 import { roles } from '../data/data'
 import { type User } from '../data/schema'
 import { DataTableBulkActions } from './data-table-bulk-actions'
@@ -208,11 +205,15 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
         </Table>
         <EmptyResults
           show={noMatches}
-          entity='users'
-          searchTerm={
-            typeof usernameFilter === 'string' ? usernameFilter : undefined
+          message={
+            <EmptyResultsMessage
+              entity='users'
+              searchTerm={
+                typeof usernameFilter === 'string' ? usernameFilter : undefined
+              }
+            />
           }
-          onClear={clearFilters}
+          onAction={clearFilters}
         />
       </div>
       <DataTablePagination table={table} className='mt-auto' />

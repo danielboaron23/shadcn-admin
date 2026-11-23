@@ -22,11 +22,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import {
-  DataTablePagination,
-  DataTableToolbar,
-  EmptyResults,
-} from '@/components/data-table'
+import { DataTablePagination, DataTableToolbar } from '@/components/data-table'
+import { EmptyResults, EmptyResultsMessage } from '@/components/empty-results'
 import { priorities, statuses } from '../data/data'
 import { type Task } from '../data/schema'
 import { DataTableBulkActions } from './data-table-bulk-actions'
@@ -209,9 +206,10 @@ export function TasksTable({ data }: DataTableProps) {
         </Table>
         <EmptyResults
           show={noMatches}
-          entity='tasks'
-          searchTerm={globalFilter}
-          onClear={clearFilters}
+          message={
+            <EmptyResultsMessage entity='tasks' searchTerm={globalFilter} />
+          }
+          onAction={clearFilters}
         />
       </div>
       <DataTablePagination table={table} className='mt-auto' />
