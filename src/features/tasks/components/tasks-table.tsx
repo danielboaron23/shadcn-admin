@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { getRouteApi } from '@tanstack/react-router'
 import {
   type SortingState,
@@ -23,6 +23,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { DataTablePagination, DataTableToolbar } from '@/components/data-table'
+import { EmptyResults, EmptyResultsMessage } from '@/components/empty-results'
 import { priorities, statuses } from '../data/data'
 import { type Task } from '../data/schema'
 import { DataTableBulkActions } from './data-table-bulk-actions'
@@ -104,8 +105,22 @@ export function TasksTable({ data }: DataTableProps) {
     ensurePageInRange(pageCount)
   }, [pageCount, ensurePageInRange])
 
+  const containerRef = useRef<HTMLDivElement>(null)
+  const hasRows = table.getRowModel().rows.length > 0
+  const isFiltered = columnFilters.length > 0 || Boolean(globalFilter)
+  // Counts every page, so an out-of-range page number is not shown as "no results".
+  const noMatches = isFiltered && table.getFilteredRowModel().rows.length === 0
+
+  const clearFilters = () => {
+    table.resetColumnFilters()
+    table.setGlobalFilter('')
+    // The button goes away once rows are back, so move focus to the search box.
+    containerRef.current?.querySelector('input')?.focus()
+  }
+
   return (
     <div
+      ref={containerRef}
       className={cn(
         'max-sm:has-[div[role="toolbar"]]:mb-16', // Add margin bottom to the table on mobile when the toolbar is visible
         'flex flex-1 flex-col gap-4'
@@ -155,7 +170,7 @@ export function TasksTable({ data }: DataTableProps) {
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
+            {hasRows ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
@@ -177,7 +192,7 @@ export function TasksTable({ data }: DataTableProps) {
                   ))}
                 </TableRow>
               ))
-            ) : (
+            ) : noMatches ? null : (
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
@@ -189,6 +204,13 @@ export function TasksTable({ data }: DataTableProps) {
             )}
           </TableBody>
         </Table>
+        <EmptyResults
+          show={noMatches}
+          message={
+            <EmptyResultsMessage entity='tasks' searchTerm={globalFilter} />
+          }
+          onAction={clearFilters}
+        />
       </div>
       <DataTablePagination table={table} className='mt-auto' />
       <DataTableBulkActions table={table} />

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   type SortingState,
   type VisibilityState,
@@ -22,6 +22,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { DataTablePagination, DataTableToolbar } from '@/components/data-table'
+import { EmptyResults, EmptyResultsMessage } from '@/components/empty-results'
 import { roles } from '../data/data'
 import { type User } from '../data/schema'
 import { DataTableBulkActions } from './data-table-bulk-actions'
@@ -92,8 +93,24 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
     ensurePageInRange(table.getPageCount())
   }, [table, ensurePageInRange])
 
+  const containerRef = useRef<HTMLDivElement>(null)
+  const hasRows = table.getRowModel().rows.length > 0
+  const isFiltered = columnFilters.length > 0
+  // Counts every page, so an out-of-range page number is not shown as "no results".
+  const noMatches = isFiltered && table.getFilteredRowModel().rows.length === 0
+  const usernameFilter = columnFilters.find(
+    (filter) => filter.id === 'username'
+  )?.value
+
+  const clearFilters = () => {
+    table.resetColumnFilters()
+    // The button goes away once rows are back, so move focus to the search box.
+    containerRef.current?.querySelector('input')?.focus()
+  }
+
   return (
     <div
+      ref={containerRef}
       className={cn(
         'max-sm:has-[div[role="toolbar"]]:mb-16', // Add margin bottom to the table on mobile when the toolbar is visible
         'flex flex-1 flex-col gap-4'
@@ -150,7 +167,7 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
+            {hasRows ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
@@ -174,7 +191,7 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
                   ))}
                 </TableRow>
               ))
-            ) : (
+            ) : noMatches ? null : (
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
@@ -186,6 +203,18 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
             )}
           </TableBody>
         </Table>
+        <EmptyResults
+          show={noMatches}
+          message={
+            <EmptyResultsMessage
+              entity='users'
+              searchTerm={
+                typeof usernameFilter === 'string' ? usernameFilter : undefined
+              }
+            />
+          }
+          onAction={clearFilters}
+        />
       </div>
       <DataTablePagination table={table} className='mt-auto' />
       <DataTableBulkActions table={table} />

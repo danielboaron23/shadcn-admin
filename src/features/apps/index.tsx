@@ -1,4 +1,4 @@
-import { type ChangeEvent, useState } from 'react'
+import { type ChangeEvent, useRef, useState } from 'react'
 import { getRouteApi } from '@tanstack/react-router'
 import { SlidersHorizontal, ArrowUpAZ, ArrowDownAZ } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
 import { ConfigDrawer } from '@/components/config-drawer'
+import { EmptyResults, EmptyResultsMessage } from '@/components/empty-results'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
@@ -81,6 +82,20 @@ export function Apps() {
     navigate({ search: (prev) => ({ ...prev, sort }) })
   }
 
+  const searchInputRef = useRef<HTMLInputElement>(null)
+  const isFiltered = searchTerm !== '' || appType !== 'all'
+  const noMatches = isFiltered && filteredApps.length === 0
+
+  const clearSearchAndFilter = () => {
+    setSearchTerm('')
+    setAppType('all')
+    navigate({
+      search: (prev) => ({ ...prev, filter: undefined, type: undefined }),
+    })
+    // The button goes away once the apps are back, so move focus to the search box.
+    searchInputRef.current?.focus()
+  }
+
   return (
     <>
       {/* ===== Top Heading ===== */}
@@ -106,6 +121,7 @@ export function Apps() {
         <div className='my-4 flex items-end justify-between sm:my-0 sm:items-center'>
           <div className='flex flex-col gap-4 sm:my-4 sm:flex-row'>
             <Input
+              ref={searchInputRef}
               placeholder='Filter apps...'
               className='h-9 w-40 lg:w-[250px]'
               value={searchTerm}
@@ -146,33 +162,44 @@ export function Apps() {
           </Select>
         </div>
         <Separator className='shadow-sm' />
-        <ul className='faded-bottom no-scrollbar grid gap-4 overflow-auto pt-4 pb-16 md:grid-cols-2 lg:grid-cols-3'>
-          {filteredApps.map((app) => (
-            <li
-              key={app.name}
-              className='rounded-lg border p-4 hover:shadow-md'
-            >
-              <div className='mb-8 flex items-center justify-between'>
-                <div
-                  className={`bg-muted flex size-10 items-center justify-center rounded-lg p-2`}
-                >
-                  {app.logo}
+        <EmptyResults
+          show={noMatches}
+          bordered
+          className='mt-4'
+          message={
+            <EmptyResultsMessage entity='apps' searchTerm={searchTerm} />
+          }
+          onAction={clearSearchAndFilter}
+        />
+        {!noMatches && (
+          <ul className='faded-bottom no-scrollbar grid gap-4 overflow-auto pt-4 pb-16 md:grid-cols-2 lg:grid-cols-3'>
+            {filteredApps.map((app) => (
+              <li
+                key={app.name}
+                className='rounded-lg border p-4 hover:shadow-md'
+              >
+                <div className='mb-8 flex items-center justify-between'>
+                  <div
+                    className={`bg-muted flex size-10 items-center justify-center rounded-lg p-2`}
+                  >
+                    {app.logo}
+                  </div>
+                  <Button
+                    variant='outline'
+                    size='sm'
+                    className={`${app.connected ? 'border border-blue-300 bg-blue-50 hover:bg-blue-100 dark:border-blue-700 dark:bg-blue-950 dark:hover:bg-blue-900' : ''}`}
+                  >
+                    {app.connected ? 'Connected' : 'Connect'}
+                  </Button>
                 </div>
-                <Button
-                  variant='outline'
-                  size='sm'
-                  className={`${app.connected ? 'border border-blue-300 bg-blue-50 hover:bg-blue-100 dark:border-blue-700 dark:bg-blue-950 dark:hover:bg-blue-900' : ''}`}
-                >
-                  {app.connected ? 'Connected' : 'Connect'}
-                </Button>
-              </div>
-              <div>
-                <h2 className='mb-1 font-semibold'>{app.name}</h2>
-                <p className='line-clamp-2 text-gray-500'>{app.desc}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
+                <div>
+                  <h2 className='mb-1 font-semibold'>{app.name}</h2>
+                  <p className='line-clamp-2 text-gray-500'>{app.desc}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
       </Main>
     </>
   )
