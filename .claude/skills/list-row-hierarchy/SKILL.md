@@ -55,6 +55,11 @@ Create your workspace                                      2 min read   >
 
 See `src/features/help-center/components/article-list.tsx`.
 
+The same rule covers the "Related articles" cards on the article page. Related
+articles share the article's topic, and the article header already shows that
+topic as a badge, so the cards show only the title, the summary and the reading
+time. See `src/features/help-center/components/article-card.tsx`.
+
 ## When a repeated value may stay
 
 - Nothing above the list shows it, and users need it to tell rows apart. Then
