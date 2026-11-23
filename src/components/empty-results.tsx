@@ -1,10 +1,12 @@
-import { SearchX, X } from 'lucide-react'
+import { type LucideIcon, SearchX, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 
 type EmptyResultsProps = {
   /** True when a search or filter matches nothing. */
   show: boolean
+  /** Defaults to the "search found nothing" icon. */
+  icon?: LucideIcon
   title?: string
   /** One line of help under the title. */
   message?: React.ReactNode
@@ -29,6 +31,7 @@ type EmptyResultsProps = {
  */
 export function EmptyResults({
   show,
+  icon: Icon = SearchX,
   title = 'No results',
   message,
   actionLabel = 'Clear search and filters',
@@ -47,7 +50,7 @@ export function EmptyResults({
     >
       {show && (
         <div className='bg-muted text-muted-foreground flex size-10 items-center justify-center rounded-lg'>
-          <SearchX className='size-4' aria-hidden='true' />
+          <Icon className='size-4' aria-hidden='true' />
         </div>
       )}
       <div role='status' className='flex w-full max-w-md flex-col gap-1'>
