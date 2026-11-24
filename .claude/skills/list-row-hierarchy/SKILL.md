@@ -1,0 +1,77 @@
+---
+name: list-row-hierarchy
+description: Use when designing, building or reviewing any list, table or card grid (articles, tasks, users, apps, search results). Keeps rows quiet so the title leads - nothing a filter or header above already shows is repeated on every row, and each row gets one quiet meta item plus the affordance.
+---
+
+# List row hierarchy
+
+People read a list by scanning titles. Everything else on a row competes with
+the title, and it competes once per row, so one small extra becomes a whole
+column of noise.
+
+This skill comes from the design review of the Help Center (DAS-5, PR #19):
+every article row showed a topic badge, a reading time and an arrow, while the
+topic chips above the list already showed the topics.
+
+## The rules
+
+1. **Never repeat on every row what a filter or header above already shows.**
+   If chips, tabs, a select, a section heading or the page title already tell
+   the user the topic, status, owner or type, leave it off the rows.
+2. **Next to the title, keep one quiet meta item plus the affordance.**
+   One short, muted piece of meta (reading time, date, count) and the thing
+   that says "this opens" (a chevron, or the card itself). Nothing else.
+
+## How to apply
+
+Do this before adding anything to a row, and when reviewing a list.
+
+1. Write down what the controls and headings above the list already say:
+   filter chips, tabs, column headers, section title, result summary.
+2. For each element on the row, ask "is this already said above?". If yes,
+   remove it from the row. Do not make it smaller or lighter; remove it.
+3. From what is left besides the title and summary, pick the one meta item that
+   helps the user choose a row. Style it quietly: `text-xs` or `text-sm`,
+   `text-muted-foreground`, no border, no fill.
+4. Keep one affordance. A row that is a link gets a chevron at the end
+   (`rtl:rotate-180`). A card that is a link needs no extra icon.
+5. Make the same decision for every layout of the row. If the wide row drops
+   an item, the narrow card drops it too.
+
+Badges, pills and icons with a border or a fill are loud. One per row is
+already a lot. One per row that repeats a filter is always wrong.
+
+## Example: Help Center article rows
+
+The topic chips above the list ("All", "Getting started", "Account & billing",
+...) already show the topics.
+
+Before, every row ended with three things competing with the title:
+
+```
+Create your workspace                  [Getting started]   2 min read   >
+```
+
+After, the topic badge is gone, on wide rows and on narrow cards:
+
+```
+Create your workspace                                      2 min read   >
+```
+
+See `src/features/help-center/components/article-list.tsx`.
+
+The "Related articles" cards on the article page follow the same rule: the
+article header above them already shows a topic badge, so each card shows only
+the reading time, the title and the summary. See
+`src/features/help-center/components/article-card.tsx`.
+
+## When a repeated value may stay
+
+- Nothing above the list shows it, and users need it to tell rows apart. Then
+  it can be the one meta item. It replaces the other meta; it is not added
+  next to it.
+- It is the point of the row, such as status in a task table that has a status
+  column. A table column with a header is not a per-row repeat.
+
+If you are not sure an item earns its place, leave it out and say so in the PR,
+so the designer can decide.
