@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   type SortingState,
   type VisibilityState,
@@ -22,6 +22,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { DataTablePagination, DataTableToolbar } from '@/components/data-table'
+import { EmptyResults } from '@/components/empty-results'
 import { roles } from '../data/data'
 import { type User } from '../data/schema'
 import { DataTableBulkActions } from './data-table-bulk-actions'
@@ -92,8 +93,21 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
     ensurePageInRange(table.getPageCount())
   }, [table, ensurePageInRange])
 
+  // A search or filter is active and it matches nothing, on any page
+  const containerRef = useRef<HTMLDivElement>(null)
+  const isFiltered = columnFilters.length > 0
+  const showEmptyResults =
+    isFiltered && table.getFilteredRowModel().rows.length === 0
+
+  const clearSearchAndFilters = () => {
+    table.resetColumnFilters()
+    // The button disappears with the empty state, so hand focus to the filter box
+    containerRef.current?.querySelector('input')?.focus()
+  }
+
   return (
     <div
+      ref={containerRef}
       className={cn(
         'max-sm:has-[div[role="toolbar"]]:mb-16', // Add margin bottom to the table on mobile when the toolbar is visible
         'flex flex-1 flex-col gap-4'
@@ -174,7 +188,7 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
                   ))}
                 </TableRow>
               ))
-            ) : (
+            ) : showEmptyResults ? null : (
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
@@ -186,6 +200,11 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
             )}
           </TableBody>
         </Table>
+        <EmptyResults
+          show={showEmptyResults}
+          description='No users match your search and filters.'
+          onClear={clearSearchAndFilters}
+        />
       </div>
       <DataTablePagination table={table} className='mt-auto' />
       <DataTableBulkActions table={table} />
