@@ -1,61 +1,71 @@
-import { type LucideIcon, SearchX } from 'lucide-react'
+import { SearchX, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 
 type EmptyResultsProps = {
   /**
-   * False hides the block but keeps its status region on the page.
-   * Screen readers only announce a status region reliably when it exists
-   * before its text appears, so keep the component mounted and toggle this.
+   * True when a search or filter matches nothing. Keep the component mounted
+   * and toggle this prop, so the status region can announce the change.
    */
-  show?: boolean
-  /** Defaults to the "search found nothing" icon. */
-  icon?: LucideIcon
-  title: React.ReactNode
-  /** One or two lines of help under the title. */
-  description?: React.ReactNode
-  /** Usually one small outline button that resets the search and filters. */
-  action?: React.ReactNode
+  show: boolean
+  /** One line that says what happened, for example "No tasks match your search and filters." */
+  description: string
+  onClear: () => void
   className?: string
 }
 
 /**
- * Shown when a search or filter matches nothing, or a link leads nowhere.
- * Not for the first-use state, where a list has no data at all.
+ * Shown when a search or filter matches nothing. It is not the first-use
+ * empty state (a list with no data yet), which is a separate component.
  */
 export function EmptyResults({
-  show = true,
-  icon: Icon = SearchX,
-  title,
+  show,
   description,
-  action,
+  onClear,
   className,
 }: EmptyResultsProps) {
   return (
     <div
-      data-slot='empty-results'
       className={cn(
-        show && 'flex flex-col items-center gap-3 px-6 py-14 text-center',
+        show && 'flex flex-col items-center gap-3 px-6 py-14',
         show && className
       )}
     >
       {show && (
-        <div className='bg-muted text-muted-foreground flex size-10 items-center justify-center rounded-lg'>
-          <Icon className='size-4' aria-hidden='true' />
+        <div
+          aria-hidden='true'
+          className='bg-muted text-muted-foreground flex size-10 shrink-0 items-center justify-center rounded-lg'
+        >
+          <SearchX className='size-4' />
         </div>
       )}
-      <div role='status' className='flex w-full flex-col gap-1'>
+      <div
+        role='status'
+        className={cn(show && 'flex flex-col items-center gap-1 text-center')}
+      >
         {show && (
           <>
-            <p className='text-base font-semibold break-words'>{title}</p>
-            {description && (
-              <p className='text-muted-foreground text-sm break-words'>
-                {description}
-              </p>
-            )}
+            <p className='text-foreground text-base font-semibold'>
+              No results
+            </p>
+            {/* dir='auto' keeps the full stop at the end of the sentence in RTL */}
+            <p dir='auto' className='text-muted-foreground text-sm'>
+              {description}
+            </p>
           </>
         )}
       </div>
-      {show && action}
+      {show && (
+        <Button
+          variant='outline'
+          size='sm'
+          className='has-[>svg]:px-3'
+          onClick={onClear}
+        >
+          <X aria-hidden='true' />
+          Clear search and filters
+        </Button>
+      )}
     </div>
   )
 }

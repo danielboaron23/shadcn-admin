@@ -1,8 +1,6 @@
 import { useRef, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getRouteApi } from '@tanstack/react-router'
-import { RotateCcw } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { EmptyResults } from '@/components/empty-results'
 import { ArticleList, ArticleListSkeleton } from './components/article-list'
 import { HelpCenterShell } from './components/help-center-shell'
@@ -123,34 +121,12 @@ export function HelpCenter() {
 
         <EmptyResults
           show={!!data && count === 0}
-          title={
-            term ? (
-              <>
-                No articles match “<bdi>{term}</bdi>”
-                {activeTopic && ` in ${activeTopic.title}`}
-              </>
-            ) : (
-              `No articles in ${activeTopic?.title ?? 'this topic'} yet`
-            )
-          }
           description={
             term
-              ? activeTopic
-                ? 'Try another word, or search all topics. Clearing resets the search and the topic filter.'
-                : 'Try another word.'
-              : undefined
+              ? `No articles match “${term}”${activeTopic ? ` in ${activeTopic.title}` : ''}.`
+              : `No articles in ${activeTopic?.title ?? 'this topic'} yet.`
           }
-          action={
-            <Button
-              type='button'
-              variant='outline'
-              size='sm'
-              onClick={resetAll}
-            >
-              <RotateCcw aria-hidden='true' />
-              {term ? 'Clear search and filters' : 'Show all articles'}
-            </Button>
-          }
+          onClear={resetAll}
         />
       </section>
     </HelpCenterShell>

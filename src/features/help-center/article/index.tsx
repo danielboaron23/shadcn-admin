@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getRouteApi, Link } from '@tanstack/react-router'
-import { ArrowLeft, CalendarDays, Clock, FileX } from 'lucide-react'
+import { ArrowLeft, CalendarDays, Clock } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
-import { EmptyResults } from '@/components/empty-results'
 import { ArticleCard } from '../components/article-card'
+import { ArticleNotFound } from '../components/article-not-found'
 import { HelpCenterShell } from '../components/help-center-shell'
 import { HelpHero } from '../components/help-hero'
 import { HelpSearchField } from '../components/help-search-field'
@@ -50,20 +50,7 @@ export function HelpArticle() {
           onQuerySubmit={submitSearch}
           onTopicChange={(topic) => openHelpCenter({ topic })}
         />
-        <EmptyResults
-          className='w-full max-w-220 md:mt-4'
-          icon={FileX}
-          title='This article isn’t available'
-          description='The link may be old, or the article was renamed. Search above, or go back to all articles.'
-          action={
-            <Button asChild variant='outline' size='sm'>
-              <Link to='/help-center'>
-                <ArrowLeft aria-hidden='true' className='rtl:rotate-180' />
-                Back to Help Center
-              </Link>
-            </Button>
-          }
-        />
+        <ArticleNotFound className='w-full max-w-220 md:mt-4' />
       </HelpCenterShell>
     )
   }
