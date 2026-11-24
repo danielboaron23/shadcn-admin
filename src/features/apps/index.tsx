@@ -1,4 +1,4 @@
-import { type ChangeEvent, useState } from 'react'
+import { type ChangeEvent, useRef, useState } from 'react'
 import { getRouteApi } from '@tanstack/react-router'
 import { SlidersHorizontal, ArrowUpAZ, ArrowDownAZ } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
 import { ConfigDrawer } from '@/components/config-drawer'
+import { EmptyResults } from '@/components/empty-results'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
@@ -40,6 +41,7 @@ export function Apps() {
   const [sort, setSort] = useState(initSort)
   const [appType, setAppType] = useState(type)
   const [searchTerm, setSearchTerm] = useState(filter)
+  const searchInputRef = useRef<HTMLInputElement>(null)
 
   const filteredApps = apps
     .sort((a, b) =>
@@ -55,6 +57,10 @@ export function Apps() {
           : true
     )
     .filter((app) => app.name.toLowerCase().includes(searchTerm.toLowerCase()))
+
+  // A search or filter is active and it matches nothing
+  const isFiltered = searchTerm !== '' || appType !== 'all'
+  const showEmptyResults = isFiltered && filteredApps.length === 0
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value)
@@ -74,6 +80,16 @@ export function Apps() {
         type: value === 'all' ? undefined : value,
       }),
     })
+  }
+
+  const clearSearchAndFilter = () => {
+    setSearchTerm('')
+    setAppType('all')
+    navigate({
+      search: (prev) => ({ ...prev, filter: undefined, type: undefined }),
+    })
+    // The button disappears with the empty state, so hand focus to the filter box
+    searchInputRef.current?.focus()
   }
 
   const handleSortChange = (sort: 'asc' | 'desc') => {
@@ -106,6 +122,7 @@ export function Apps() {
         <div className='my-4 flex items-end justify-between sm:my-0 sm:items-center'>
           <div className='flex flex-col gap-4 sm:my-4 sm:flex-row'>
             <Input
+              ref={searchInputRef}
               placeholder='Filter apps...'
               className='h-9 w-40 lg:w-[250px]'
               value={searchTerm}
@@ -146,7 +163,16 @@ export function Apps() {
           </Select>
         </div>
         <Separator className='shadow-sm' />
-        <ul className='faded-bottom no-scrollbar grid gap-4 overflow-auto pt-4 pb-16 md:grid-cols-2 lg:grid-cols-3'>
+        <EmptyResults
+          show={showEmptyResults}
+          description='No apps match your search and filter.'
+          onClear={clearSearchAndFilter}
+          className='mt-6'
+        />
+        <ul
+          hidden={showEmptyResults}
+          className='faded-bottom no-scrollbar grid gap-4 overflow-auto pt-4 pb-16 md:grid-cols-2 lg:grid-cols-3'
+        >
           {filteredApps.map((app) => (
             <li
               key={app.name}
