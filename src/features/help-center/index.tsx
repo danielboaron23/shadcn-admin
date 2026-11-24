@@ -38,9 +38,6 @@ export function HelpCenter() {
       })
     : []
   const count = results.length
-  const topicTitles = Object.fromEntries(
-    (data?.categories ?? []).map((c) => [c.id, c.title])
-  )
 
   const setQuery = (value: string) => {
     setDraft(value)
@@ -121,13 +118,7 @@ export function HelpCenter() {
         {!data ? (
           <ArticleListSkeleton />
         ) : (
-          count > 0 && (
-            <ArticleList
-              articles={results}
-              topicTitles={topicTitles}
-              showTopic={!activeTopic}
-            />
-          )
+          count > 0 && <ArticleList articles={results} />
         )}
 
         <EmptyResults

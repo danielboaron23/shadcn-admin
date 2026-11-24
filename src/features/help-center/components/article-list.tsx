@@ -1,36 +1,26 @@
 import { Link } from '@tanstack/react-router'
 import { ChevronRight, FileText } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { Badge } from '@/components/ui/badge'
 import { Card } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
-import { type HelpArticle, type HelpCategoryId } from '../data/articles'
+import { type HelpArticle } from '../data/articles'
 import { formatReadTime } from '../data/utils'
 import { ArticleCard } from './article-card'
 
-type ArticleListProps = {
-  articles: HelpArticle[]
-  topicTitles: Partial<Record<HelpCategoryId, string>>
-  /** Hide the topic when the whole list is already one topic. */
-  showTopic?: boolean
-}
-
-/** Rows in one card from `md` up, separate cards below it. */
-export function ArticleList({
-  articles,
-  topicTitles,
-  showTopic = true,
-}: ArticleListProps) {
+/**
+ * Rows in one card from `md` up, separate cards below it.
+ *
+ * Rows show no topic: the chips above the list already do. Next to the title
+ * there is one quiet meta item (reading time) and the arrow.
+ */
+export function ArticleList({ articles }: { articles: HelpArticle[] }) {
   return (
     <>
       <Card className='hidden gap-0 py-0 md:flex'>
         <ul>
           {articles.map((article) => (
             <li key={article.slug} className='border-b last:border-b-0'>
-              <ArticleRow
-                article={article}
-                topic={showTopic ? topicTitles[article.categoryId] : undefined}
-              />
+              <ArticleRow article={article} />
             </li>
           ))}
         </ul>
@@ -39,10 +29,7 @@ export function ArticleList({
       <ul className='flex flex-col gap-3 md:hidden'>
         {articles.map((article) => (
           <li key={article.slug}>
-            <ArticleCard
-              article={article}
-              topic={showTopic ? topicTitles[article.categoryId] : undefined}
-            />
+            <ArticleCard article={article} />
           </li>
         ))}
       </ul>
@@ -50,13 +37,7 @@ export function ArticleList({
   )
 }
 
-function ArticleRow({
-  article,
-  topic,
-}: {
-  article: HelpArticle
-  topic?: string
-}) {
+function ArticleRow({ article }: { article: HelpArticle }) {
   return (
     <Link
       to='/help-center/$slug'
@@ -74,7 +55,6 @@ function ArticleRow({
         <h3 className='truncate font-medium'>{article.title}</h3>
         <p className='text-muted-foreground truncate'>{article.summary}</p>
       </div>
-      {topic && <Badge variant='outline'>{topic}</Badge>}
       <span className='text-muted-foreground text-xs whitespace-nowrap'>
         {formatReadTime(article.readingMinutes)}
       </span>

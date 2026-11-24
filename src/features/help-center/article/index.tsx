@@ -140,16 +140,7 @@ export function HelpArticle() {
                 <ul className='grid gap-4 md:grid-cols-2'>
                   {related.map((item) => (
                     <li key={item.slug}>
-                      <ArticleCard
-                        article={item}
-                        topic={
-                          item.categoryId === article.categoryId
-                            ? undefined
-                            : data?.categories.find(
-                                (c) => c.id === item.categoryId
-                              )?.title
-                        }
-                      />
+                      <ArticleCard article={item} />
                     </li>
                   ))}
                 </ul>
